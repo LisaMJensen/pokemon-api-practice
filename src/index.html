@@ -1,17 +1,25 @@
 <html>
   <head>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <!-- <script type="text/javascript" src="./../src/weather-interface.js"></script> -->
-    <title>Weather</title>
+    <title>Pokemon Sprites</title>
   </head>
   <body>
     <div class="container">
-      <h1>XKCD Comic API</h1>
-      <label for="comicNumber">Enter a number, get a comic!</label>
-      <input id="comicNumber" type="number">
-      <button class="btn-success" id="comicButton">Get your comic!</button>
+      <h1>Pokemon Sprites</h1>
+      <label for="enteredPokemonName">Enter a Pokemon name or Pokedex number!</label>
+      <input id="enteredPokemonName" type="text">
+      <button class="btn-success" id="comicButton">Get sprites!</button>
       <div class="errors"></div>
-      <div id="comicWindow" class="showComic"></div>
+      <table>
+      <td>
+      <div class="showDefault"></div>
+    </td>
+    <td>
+      <div class="showShiny"></div>
+    </td>
+      </table>
     </div>
   </body>
 </html>

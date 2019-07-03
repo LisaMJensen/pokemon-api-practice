@@ -1,6 +1,20 @@
 body {
-  background-color: #BDB4BF;
+  background-color: #ff9999;
+}
+h1 {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+  font-size: 85px;
+}
+#comicWindow {
 }
 
-#comicWindow {
+.showDefault img {
+  height: 200px;
+  width: auto;
+}
+
+.showShiny img{
+  height: 200px;
+  width: auto;
 }

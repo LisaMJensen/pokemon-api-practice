@@ -6,11 +6,12 @@ import './styles.css';
 
 $(document).ready(function() {
   $('#comicButton').click(function() {
-    let userInput = $('#comicNumber').val();
-    $('#comicNumber').val("");
+    let pokemonName = $('#enteredPokemonName').val();
+    $('#enteredPokemonName').val("");
 
       let request = new XMLHttpRequest();
-      const url = `https://CORS-anywhere.herokuapp.com/xkcd.com/${userInput}/info.0.json`;
+      const url = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-form/${pokemonName}/
+      `;
 
       request.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
@@ -23,8 +24,8 @@ $(document).ready(function() {
       request.send();
 
       const getElements = function(response) {
-      $('.showComic').html(`<img src="${response.img}">`);
-      // $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
+      $('.showDefault').html(`<img src="${response.sprites.front_default}">`);
+      $('.showShiny').html(`<img src="${response.sprites.front_shiny}">`);
 
 
 
