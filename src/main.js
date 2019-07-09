@@ -9,27 +9,86 @@ $(document).ready(function() {
     let pokemonName = $('#enteredPokemonName').val();
     $('#enteredPokemonName').val("");
 
+    // let promise = new Promise(function(resolve, reject){
       let request = new XMLHttpRequest();
-      const url = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-form/${pokemonName}/
+      const url = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/
       `;
 
       request.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        const response = JSON.parse(this.responseText);
-        getElements(response);
+        if (this.readyState === 4 && this.status === 200) {
+          const response = JSON.parse(this.responseText);
+          getElements(response);
+        } else {
+            reject(Error(request.statusText));
         }
       }
-
       request.open("GET", url, true);
       request.send();
+    // });
 
       const getElements = function(response) {
-      $('.showDefault').html(`<img src="${response.sprites.front_default}">`);
-      $('.showShiny').html(`<img src="${response.sprites.front_shiny}">`);
+      // $('.showShiny').html(`<img src="${response.sprites.front_shiny}">`);
 
+//To get Pokemon habitat: ***** "pokemon-species"
+$('.showHabitat').text(`${response.habitat.name}`);
+
+//To get Pokemon evolves from: ***** "pokemon-species"
+if (`${response.evolves_from_species.name}` === true) {
+  $('.showEvolution').text(`${response.evolves_from_species.name}`);
+}
+
+// console.log(`${response.evolves_from_species.name}`);
+
+//To get Pokemon description: ***** "pokemon-species"
+    if (response.flavor_text_entries.length > 0) {
+          // for(let i=0; i< response.flavor_text_entries.length; i++) {
+          var description = (`${response.flavor_text_entries[(response.flavor_text_entries.length-1)].flavor_text}`);
+          var fixedDescription = description.replace("\f", " ");
+         $('.showDescription').text(fixedDescription);
+        // }
+
+console.log(`${response.flavor_text_entries[(response.flavor_text_entries.length-1)].flavor_text}`);
+  }
 
 
 
     }
+
+    let request2 = new XMLHttpRequest();
+    const url2 = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon/${pokemonName}/
+    `;
+
+    request2.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      const response2 = JSON.parse(this.responseText);
+      getElements2(response2);
+      }
+    }
+
+    request2.open("GET", url2, true);
+    request2.send();
+
+    const getElements2 = function(response2) {
+//To get defautlt sprite: *****"pokemon"
+      $('.showDefault').html(`<img src="${response2.sprites.front_default}">`);
+
+//To get Pokemon type: ***** "pokemon"
+      if (response2.types.length > 0) {
+        for(let i=0; i< response2.types.length; i++) {
+          $('.showTypes').append(`${response2.types[i].type.name}` + "<br>");
+        }
+
+      }
+
+      if (response2.moves.length > 0) {
+         $('.showMoves').empty();
+      for(let i=0; i< response2.moves.length; i++) {
+     $('.showMoves').append(`${response2.moves[i].move.name}` + "<br>");
+
+    }
+
+    }
+
+  };
   });
 });
